@@ -1,0 +1,21 @@
+div(ng-include='\'partials/navbar.html\'')
+
+.container-fluid.tasks-page
+  .task.row
+    .col-xs-1
+    .col-md-9.col-xs-11
+      .info
+        {{ task.title }} - {{ task.user.name }}
+    .col-md-2
+      div
+        {{ task.content }}
+  div.row.cmt(ng-repeat='comment in task.comments')
+    div.col-md-12
+      p {{ comment.content }}
+        a(ng-click='deleteComment(comment._id)') Delete
+  div.cmt-form
+    form
+      textarea(ng-model='comment.content', placeholder='Comentario')
+      input(type="submit", ng-click='addComment()', value='Post')
+  div.row
+    a(href="/tasks") Back

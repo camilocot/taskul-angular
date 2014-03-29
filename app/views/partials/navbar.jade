@@ -1,0 +1,31 @@
+nav.navbar.navbar-default(role='navigation', ng-controller='NavbarCtrl')
+  .container-fluid
+    .navbar-header
+      button.navbar-toggle(type='button', ng-click='isCollapsed = !isCollapsed')
+        span.sr-only
+          Toggle Navigation
+        span.icon-bar
+        span.icon-bar
+        span.icon-bar
+      a.navbar-brand(href='#') Taskul
+    .collapse.navbar-collapse(collapse='isCollapsed')
+      ul.nav.navbar-nav
+        li(ng-class='{active: isActive("/")}')
+          a(ng-href='#') Home
+        li(ng-show='currentUser', ng-repeat='item in menu', ng-class='{active: isActive(item.link)}')
+          a(ng-href='{{item.link}}') {{item.title}}
+        li(ng-hide='currentUser', ng-class='{active: isActive("/login")}')
+          a(href='/login') Login
+        li(ng-hide='currentUser', ng-class='{active: isActive("/signup")}')
+          a(href='/signup') Sign up
+      ul.nav.navbar-nav.navbar-right.drop(ng-show='currentUser')
+        li.dropdown
+          a.dropdown-toggle
+            img.nav-pic(ng-src='http://www.gravatar.com/avatar/{{ currentUser.md5_hash }}')
+          ul.dropdown-menu
+            li
+              a(href='/users/me') {{currentUser.name}}
+            li
+              a(href='/settings') Password
+            li
+              a(href='', ng-click='logout()') Logout

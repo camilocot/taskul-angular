@@ -1,0 +1,15 @@
+div(ng-include='\'partials/navbar.html\'')
+
+.container-fluid.tasks-page
+  .task.row(ng-repeat='task in tasks')
+    .col-xs-1
+    .col-md-9.col-xs-11
+      .info
+        {{ task.title }} - {{ task.user.name }}
+      div
+        a(ng-click='deleteTask(task._id)') Delete
+        a(href='#/tasks/{{ task._id }}') Comments
+    .col-md-2
+
+  .row.pull-right
+    button.btn.btn-default(ng-click='openModalTask()') New Task
